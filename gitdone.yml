@@ -1,6 +1,7 @@
 ---
 - name: run Git end-of-lab steps
   hosts: localhost
+  connection: local
   gather_facts: no
 
   vars_prompt:
