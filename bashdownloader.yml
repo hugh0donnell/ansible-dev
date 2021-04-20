@@ -1,0 +1,42 @@
+- name: get the scripts
+  hosts: localhost
+  connection: local
+
+  tasks:
+          - name: download the script
+            get_url:
+                    url: https://labs.alta3.com/projects/ansible/deploy/max-teardown.sh
+                    dest: /home/student
+
+          - name: download another script
+            get_url:
+                    url: https://labs.alta3.com/projects/ansible/deploy/pexpress-setup.sh
+                    dest: /home/student
+
+          - name: run teardown
+            script:
+                    cmd: /home/student/max_teardown.sh
+
+          - name: run setup
+            script:
+                    cmd: /home/student/pexpress-setup.sh
+
+- name: copy public keys
+  hosts: planetexpress,!farnsworth
+  gather_facts: no
+
+  vars_prompt:
+        - name: prompt for password
+          prompt: "please enter the password"
+          private: yes
+          confirm: yes
+
+   tasks:
+          - name: use the builtin auth key module
+            authorized_key:
+                    user: "{{ ansible_user }}"  # defined in the hosts file
+                    state: present
+                    key: "{{ lookup('file','~/.ssh/id_rsa.pub') }}"
+            become: yes
+
+

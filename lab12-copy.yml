@@ -1,0 +1,10 @@
+---
+- name: copying files from controller to hosts
+  hosts: planetexpress
+
+  tasks:
+          - name: copy fry's resume to hosts
+            copy:
+                    src: ~/ans/files/fry.txt   # on controller
+                    dest: ~/fry.txt            # homedir on hosts
+

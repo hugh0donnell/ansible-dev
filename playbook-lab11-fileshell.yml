@@ -1,0 +1,13 @@
+---
+- name: simply file playbook
+  hosts: planetexpress
+  gather_facts: yes
+
+  tasks:
+          - name: make a dir
+            file:
+                    path: ~/output/
+                    state: directory
+          - name: user shell module w/ wildcarding
+            shell: echo $HOME >> ~/output/path.txt
+
