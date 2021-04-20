@@ -1,0 +1,26 @@
+---
+- name: run Git end-of-lab steps
+  hosts: localhost
+  gather_facts: no
+
+  vars_prompt:
+          - name: commitreason
+            prompt: "Commit reason:"
+            private: no
+
+            #          - name: passforGit
+            #            prompt: "Git Password:"
+            #            private: yes
+            #            confirm: yes  
+
+
+  tasks:
+          - name: step1
+            shell: git add ~/ans/*
+
+          - name: step2
+            shell: git commit -m "{{ commitreason }}"
+
+
+          - name: step3
+            shell: git push origin main  
