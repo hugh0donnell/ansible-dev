@@ -1,0 +1,11 @@
+---
+- name: install SL with yum
+  hosts: planetexpress
+
+  tasks:
+          - name: instal steam loco w/ yum
+            yum:
+                    name: sl
+                    state: present
+            become: yes     # run as sudo
+
