@@ -1,0 +1,16 @@
+---
+ - name: Learning about blocks
+   hosts: planetexpress
+
+   tasks:
+    - block:
+       - shell: "echo 'My single task ran' > example.txt"
+       - shell: "echo 'My second task ran' >> example.txt"
+         #       - shell: "echo 'My third task ran' >> example.txt"
+       - shell: "/bin/false"
+
+      rescue:
+              - shell: "echo 'rescue code ran' >> example.txt"
+      always:
+              - shell: "echo 'This is the ALWAYS text' >> example.txt"
+               
